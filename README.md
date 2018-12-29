@@ -1,2 +1,4 @@
 # ReactiveObjCDemo
-练习ReactiveObjC的Demo
+> 学习ReactiveObjC写的demo
+
+
