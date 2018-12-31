@@ -64,6 +64,7 @@ static NSUInteger const kMaxUploader = 5;
     [[[RACObserve(self.scoreStepper, value) skip:1] take:self.viewModel.maxScoreUpdates]
      subscribeNext:^(id  _Nullable x) {
          @strongify(self);
+         NSLog(@"x -- %@",x);
          self.scoreUpdates++;
      }];
     
