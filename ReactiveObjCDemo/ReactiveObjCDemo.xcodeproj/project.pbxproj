@@ -14,6 +14,9 @@
 		191C980021D7522000D8269D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191C97FE21D7522000D8269D /* LaunchScreen.storyboard */; };
 		191C980321D7522000D8269D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C980221D7522000D8269D /* main.m */; };
 		191C980C21D754AD00D8269D /* SimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C980B21D754AD00D8269D /* SimpleViewController.m */; };
+		19213B5621D9CC7A0074F79C /* ComViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19213B5521D9CC7A0074F79C /* ComViewModel.m */; };
+		19213B5A21DA03370074F79C /* CSAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19213B5921DA03370074F79C /* CSAlertManager.m */; };
+		195D7C2B21D8C0E900BA6B30 /* CombinationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 195D7C2A21D8C0E900BA6B30 /* CombinationViewController.m */; };
 		9AC7CF92780850CE0EA1D9E0 /* libPods-ReactiveObjCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3682AE5897340543F2A9E396 /* libPods-ReactiveObjCDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +34,13 @@
 		191C980221D7522000D8269D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		191C980A21D754AD00D8269D /* SimpleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleViewController.h; sourceTree = "<group>"; };
 		191C980B21D754AD00D8269D /* SimpleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleViewController.m; sourceTree = "<group>"; };
+		19213B5321D9BE870074F79C /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		19213B5421D9CC7A0074F79C /* ComViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComViewModel.h; sourceTree = "<group>"; };
+		19213B5521D9CC7A0074F79C /* ComViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComViewModel.m; sourceTree = "<group>"; };
+		19213B5821DA03370074F79C /* CSAlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSAlertManager.h; sourceTree = "<group>"; };
+		19213B5921DA03370074F79C /* CSAlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAlertManager.m; sourceTree = "<group>"; };
+		195D7C2921D8C0E900BA6B30 /* CombinationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CombinationViewController.h; sourceTree = "<group>"; };
+		195D7C2A21D8C0E900BA6B30 /* CombinationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CombinationViewController.m; sourceTree = "<group>"; };
 		3682AE5897340543F2A9E396 /* libPods-ReactiveObjCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactiveObjCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F590806595C00E4943FCD3 /* Pods-ReactiveObjCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveObjCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveObjCDemo/Pods-ReactiveObjCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,11 +78,14 @@
 		191C97F221D7521F00D8269D /* ReactiveObjCDemo */ = {
 			isa = PBXGroup;
 			children = (
+				19213B5721DA03110074F79C /* Alert */,
+				195D7C2821D8C0D000BA6B30 /* Combination */,
 				191C980921D7548400D8269D /* Simple */,
 				191C97F321D7521F00D8269D /* AppDelegate.h */,
 				191C97F421D7521F00D8269D /* AppDelegate.m */,
 				191C97F621D7521F00D8269D /* ViewController.h */,
 				191C97F721D7521F00D8269D /* ViewController.m */,
+				19213B5321D9BE870074F79C /* PrefixHeader.pch */,
 				191C97F921D7521F00D8269D /* Main.storyboard */,
 				191C97FC21D7522000D8269D /* Assets.xcassets */,
 				191C97FE21D7522000D8269D /* LaunchScreen.storyboard */,
@@ -89,6 +102,26 @@
 				191C980B21D754AD00D8269D /* SimpleViewController.m */,
 			);
 			path = Simple;
+			sourceTree = "<group>";
+		};
+		19213B5721DA03110074F79C /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				19213B5821DA03370074F79C /* CSAlertManager.h */,
+				19213B5921DA03370074F79C /* CSAlertManager.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		195D7C2821D8C0D000BA6B30 /* Combination */ = {
+			isa = PBXGroup;
+			children = (
+				195D7C2921D8C0E900BA6B30 /* CombinationViewController.h */,
+				195D7C2A21D8C0E900BA6B30 /* CombinationViewController.m */,
+				19213B5421D9CC7A0074F79C /* ComViewModel.h */,
+				19213B5521D9CC7A0074F79C /* ComViewModel.m */,
+			);
+			path = Combination;
 			sourceTree = "<group>";
 		};
 		2A5697011BFAF712D8938773 /* Pods */ = {
@@ -205,8 +238,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				191C97F821D7521F00D8269D /* ViewController.m in Sources */,
+				195D7C2B21D8C0E900BA6B30 /* CombinationViewController.m in Sources */,
 				191C980321D7522000D8269D /* main.m in Sources */,
 				191C980C21D754AD00D8269D /* SimpleViewController.m in Sources */,
+				19213B5A21DA03370074F79C /* CSAlertManager.m in Sources */,
+				19213B5621D9CC7A0074F79C /* ComViewModel.m in Sources */,
 				191C97F521D7521F00D8269D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = ReactiveObjCDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -368,6 +405,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = ReactiveObjCDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

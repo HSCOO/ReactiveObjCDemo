@@ -7,7 +7,6 @@
 //
 
 #import "SimpleViewController.h"
-#import "ReactiveObjC.h"
 
 @interface SimpleViewController ()
 
