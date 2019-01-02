@@ -27,6 +27,14 @@
 //    [self testBinding];
     [self testBtn];
     [self testMerge];
+    
+    [self testCombineLatest];
+    [self testCombineLatestAndReduce];
+    [self testFlattenMap];
+//    [self testNoReplay];
+//    [self testReplay];
+    [self testReplayLazily];
+    [self testZip];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -112,6 +120,130 @@
     }] subscribeError:^(NSError * _Nullable error) {
         
     }];
+}
+
+// 高阶函数
+- (void)testCombineLatest{
+    RACSignal *signal1 = @[@1,@2].rac_sequence.signal;
+    RACSignal *signal2 = @[@3,@4].rac_sequence.signal;
+    
+    // 13、23、24
+    [[signal1 combineLatestWith:signal2] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"CombineLatest -- %@",x);
+    }];
+}
+
+- (void)testCombineLatestAndReduce{
+    RACSignal *signal1 = @[@1,@2].rac_sequence.signal;
+    RACSignal *signal2 = @[@3,@4].rac_sequence.signal;
+    
+    // 1*3、2*3、2*4
+    [[[signal1 combineLatestWith:signal2] reduceEach:^id _Nonnull(NSNumber *v1, NSNumber *v2){
+        return @(v1.integerValue * v2.integerValue);
+    }] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"CombineLatestAndReduce -- %@",x);
+    }];
+}
+
+- (void)testFlattenMap{
+    RACSignal *signal = @[@1,@2].rac_sequence.signal;
+    // 1*2、2*2
+    [[signal flattenMap:^__kindof RACSignal * _Nullable(NSNumber *value) {
+        return [RACSignal return:@(value.integerValue * 2)];
+    }] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"flattenMap -- %@",x);
+    }];
+}
+
+- (void)testNoReplay{
+    // 只能接受到自己后面的信号
+    RACSubject *letters = [RACSubject subject];
+    RACSignal *signal = letters;
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S1: %@",x);
+    }];
+    
+    [letters sendNext:@"A"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S2: %@",x);
+    }];
+    [letters sendNext:@"B"];
+    [letters sendNext:@"C"];
+}
+
+- (void)testReplay{
+    // 无论顺序怎样，都能接受到完整信号
+    RACSubject *letters = [RACReplaySubject subject];
+    RACSignal *signal = letters;
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S1: %@",x);
+    }];
+    
+    [letters sendNext:@"A"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S2: %@",x);
+    }];
+    [letters sendNext:@"B"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S3: %@",x);
+    }];
+    [letters sendNext:@"C"];
+}
+
+- (void)testReplayLast{
+    RACSubject *letters = [RACSubject subject];
+    RACSignal *signal = [letters replayLast];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S1: %@",x);
+    }];
+    
+    [letters sendNext:@"A"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S2: %@",x);
+    }];
+    [letters sendNext:@"B"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S3: %@",x);
+    }];
+    [letters sendNext:@"C"];
+}
+
+- (void)testReplayLazily{
+    RACSubject *letters = [RACSubject subject];
+    RACSignal *signal = [letters replayLazily];
+    [letters sendNext:@"A"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S1: %@",x);
+    }];
+    
+    [letters sendNext:@"B"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S2: %@",x);
+    }];
+    [letters sendNext:@"C"];
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"S3: %@",x);
+    }];
+    [letters sendNext:@"D"];
+}
+
+- (void)testZip{
+    RACSubject *letters = [RACSubject subject];
+    RACSubject *numbers = [RACSubject subject];
+    
+    RACSignal *combined = [RACSignal zip:@[letters, numbers] reduce:^id _Nonnull(NSString *letter, NSString *number){
+        return [letter stringByAppendingString:number];
+    }];
+    [combined subscribeNext:^(id  _Nullable x) {
+        NSLog(@"Zip %@",x);
+    }];
+    
+    [letters sendNext:@"A"];
+    [letters sendNext:@"B"];
+    [letters sendNext:@"C"];
+    [numbers sendNext:@"1"];
+    [numbers sendNext:@"2"];
+    [numbers sendNext:@"3"];
 }
 
 
